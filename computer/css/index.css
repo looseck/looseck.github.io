@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 800px;
+  margin: 100px auto;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: 3px;
+}
+.display {
+  padding: 40px 0 20px;
+}
+.display > .top {
+  height: 20px;
+  line-height: 20px;
+  text-align: right;
+  padding: 0 20px;
+  font-size: 14px;
+  color: rgba(56, 52, 52, 0.4);
+  user-select: none;
+}
+.display > .bot {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 36px;
+  outline-style: none;
+  line-height: 40px;
+  padding: 10px 10px 20px;
+  border: none;
+  text-align: right;
+  background-color: #fff;
+}
+.calc {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  user-select: none;
+}
+.calc > div {
+  background-color: rgba(151, 147, 147, 0.07);
+  width: 200px;
+  height: 80px;
+  flex: 0 0 auto;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 80px;
+  cursor: pointer;
+  font-size: 22px;
+}
+.calc > div:hover {
+  background-color: #efefef;
+}
+.calc .num {
+  font-weight: bold;
+}
+.calc .num,
+.calc .swi,
+.calc .dot {
+  background-color: #fff;
+}
+.calc .equ {
+  background-color: skyblue;
+  opacity: 0.8;
+}
+.calc .equ:hover {
+  background-color: skyblue;
+  opacity: 1;
+}

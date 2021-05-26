@@ -1,0 +1,861 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #b0b0b0;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font: 14px/1.5 Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+  color: #333;
+  background-color: #fff;
+  min-width: 1226px;
+  /* height: 3000px; */
+}
+
+
+/* 清除浮动 */
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+/* 分隔线样式*/
+
+.sep {
+  margin: 0 .3em;
+  color: #424242
+}
+
+
+/* 头部的nav样式开始 */
+
+.site-topbar {
+  height: 40px;
+  background-color: #333;
+  color: #b0b0b0;
+  font-size: 12px;
+}
+
+.container {
+  width: 1226px;
+  margin: 0 auto;
+}
+
+.topbar-nav {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+
+.topbar-nav>a,
+.topbar-info>a {
+  display: inline-block;
+  height: 100%;
+}
+
+.topbar-nav>a:hover,
+.topbar-info>a:hover {
+  color: #fff;
+}
+
+.topbar-cart {
+  float: right;
+  margin-left: 20px;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+}
+
+.topbar-cart>a {
+  text-align: center;
+  display: block;
+  width: 120px;
+  height: 100%;
+  background-color: #424242;
+}
+
+.topbar-cart:hover a {
+  background-color: #fff;
+  color: #ff6700;
+  position: relative;
+  z-index: 2;
+}
+
+.topbar-info {
+  float: right;
+  height: 40px;
+  line-height: 40px;
+}
+
+
+/* 头部的nav导航栏样式结束 */
+
+
+/* 头部的header导航栏样式开始 */
+
+.site-header {
+  height: 100px;
+  position: relative;
+}
+
+.header-logo {
+  width: 62px;
+  float: left;
+  margin-top: 22px;
+  position: relative;
+}
+
+.header-logo .logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  text-indent: -999em;
+}
+
+.header-logo .logo::before {
+  content: '';
+  width: 56px;
+  height: 56px;
+  background: url(../img/logo-mi2.png) no-repeat;
+  background-size: 56px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.header-nav {
+  width: 850px;
+  float: left;
+}
+
+.nav-list {
+  float: left;
+  width: 1100px;
+  height: 88px;
+  padding: 12px 0 0 30px;
+  font-size: 16px;
+}
+
+.nav-list>.nav-item {
+  float: left;
+}
+
+.nav-list>.nav-item>a {
+  display: block;
+  color: #333;
+  padding: 26px 10px 38px;
+  transition: all 0.2s;
+}
+
+.nav-list>.nav-item>a:hover {
+  color: #ff6700;
+}
+
+.nav-category {
+  float: left;
+  height: 100%;
+  width: 127px;
+  padding-right: 15px;
+  position: relative;
+}
+
+.nav-category>a {
+  display: block;
+  width: 127px;
+  height: 24px;
+  color: #333;
+  padding: 26px 0 38px;
+  transition: all 0.2s;
+}
+
+.header-search {
+  float: right;
+  width: 296px;
+  margin-top: 25px;
+  position: relative;
+}
+
+.header-search:hover .search-text,
+.header-search:hover .search-submit {
+  border-color: #b0b0b0;
+}
+
+.header-search>.search-text {
+  position: absolute;
+  width: 223px;
+  padding: 0 10px;
+  height: 48px;
+  font-size: 14px;
+  line-height: 48px;
+  border: 1px solid #e0e0e0;
+  right: 51px;
+  outline-style: none;
+}
+
+.header-search>.search-submit {
+  position: absolute;
+  width: 52px;
+  height: 50px;
+  border: 1px solid #e0e0e0;
+  top: 0;
+  right: 0;
+  outline: none;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all 0.2s;
+}
+
+.header-search .search-submit:hover {
+  background-color: #ff6700;
+  border: #ff6700;
+}
+
+
+/* 头部的header导航栏样式结束 */
+
+
+/* 分类框样式开始 */
+
+.site-category {
+  width: 234px;
+  height: 460px;
+  font-size: 14px;
+  position: absolute;
+  left: -92px;
+  top: 88px;
+  z-index: 4;
+}
+
+.site-category-list {
+  padding: 20px 0;
+  background: rgba(105, 101, 101, .6);
+}
+
+.site-category-list>li>a {
+  display: block;
+  height: 42px;
+  line-height: 42px;
+  color: #fff;
+  padding-left: 30px;
+}
+
+.site-category-list>li:hover {
+  background-color: #ff6700;
+}
+
+
+/* 分类框样式结束 */
+
+
+/* 轮播图样式开始 */
+
+.home-hero {
+  /* height: 460px; */
+  position: relative;
+}
+
+.swiper-container>.swiper-slide>a {
+  display: block;
+  height: 460px;
+  width: 100%;
+}
+
+.swiper-dot {
+  position: absolute;
+  width: 400px;
+  bottom: 30px;
+  right: 30px;
+  text-align: right;
+}
+
+.swiper-dot>a {
+  display: inline-block;
+  margin: 0 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  border-color: hsla(0, 0%, 100%, .3);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.swiper-dot>a.active {
+  background: hsla(0, 0%, 100%, .4);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.swiper-dot>a:hover {
+  background: hsla(0, 0%, 100%, .4);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.swiper-pre,
+.swiper-next {
+  position: absolute;
+  width: 41px;
+  height: 69px;
+  text-align: center;
+  line-height: 69px;
+  cursor: pointer;
+}
+
+.swiper-pre {
+  left: 234px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper-next {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swiper-pre:hover,
+.swiper-next:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+
+/* 轮播图样式结束 */
+
+
+/* 副导航栏开始 */
+
+.home-hero-sub {
+  margin-top: 15px;
+  margin-bottom: 26px;
+  /* position: relative; */
+  /* 清除浮动 */
+  /* overflow: hidden; */
+}
+
+.home-hero-sub>.span4 {
+  width: 234px;
+  background-color: #5f5750;
+  float: left;
+}
+
+.home-chanel-list {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 3px;
+  height: 170px;
+}
+
+.home-chanel-list>li {
+  float: left;
+  width: 70px;
+  height: 82px;
+  padding: 0 3px;
+  position: relative;
+}
+
+.home-chanel-list>li>a {
+  display: block;
+  width: 70px;
+  padding-top: 18px;
+  height: 46px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  opacity: .7;
+  transition: opacity .2s;
+}
+
+.home-chanel-list>li>a:hover {
+  opacity: 1;
+}
+
+.home-chanel-list>li>a>img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto 4px;
+}
+
+.home-chanel-list>li::before {
+  content: '';
+  position: absolute;
+  width: 64px;
+  height: 1px;
+  background-color: #665e57;
+  left: 6px;
+  top: -1px;
+}
+
+.home-chanel-list>li::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 70px;
+  background-color: #665e57;
+  left: 0;
+  top: 6px;
+}
+
+.home-hero-sub>.span16 {
+  float: left;
+  height: 170px;
+  margin-left: 2px;
+}
+
+.home-promo-list {
+  height: 100%;
+}
+
+.home-promo-list>li {
+  float: left;
+  height: 100%;
+  margin-left: 14px;
+}
+
+.home-promo-list>li:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-promo-list>li>a {
+  display: block;
+  height: 100%;
+}
+
+.home-promo-list>li>a>img {
+  width: 316px;
+  height: 170px;
+}
+
+
+/* 副导航栏结束 */
+
+
+/* 具体类目 小米秒杀开始 */
+
+.home-main {
+  background-color: #f5f5f5;
+  padding-top: 4px;
+  padding-bottom: 12px;
+}
+
+.box-bd {
+  position: relative;
+}
+
+.box-hd>h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 58px;
+  color: #333;
+}
+
+.flashsale-time {
+  float: left;
+  width: 234px;
+  height: 300px;
+  padding-top: 39px;
+  background: #f1eded;
+  text-align: center;
+  border-top: 1px solid #e53935;
+}
+
+.round {
+  font-size: 21px;
+  color: #ef3a3b;
+  padding-top: 15px;
+}
+
+.flashsale-time>img {
+  margin: 25px auto;
+}
+
+div.desc {
+  color: rgba(0, 0, 0, .54);
+  font-size: 15px;
+}
+
+.countdown {
+  width: 168px;
+  margin: 28px auto 0;
+}
+
+.countdown>span {
+  float: left;
+  width: 46px;
+  background: #605751;
+  font-size: 24px;
+  line-height: 46px;
+  color: #fff;
+}
+
+.countdown>i {
+  float: left;
+  width: 15px;
+  line-height: 46px;
+  font-style: normal;
+  color: #605751;
+  font-size: 28px;
+}
+
+.flashsale-list {
+  float: left;
+  width: 978px;
+  margin-left: 14px;
+}
+
+.flashsale-list-box>li {
+  float: left;
+  background-color: #fff;
+  width: 234px;
+  height: 339px;
+  margin-left: 14px;
+  border-top: 1px solid #e53935;
+}
+
+.flashsale-list-box>li:nth-child(1) {
+  margin-left: 0;
+}
+
+.flashsale-list-box>li>a {
+  display: block;
+  padding-top: 39px;
+  height: 300px;
+}
+
+.content {
+  text-align: center;
+}
+
+.thumb {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 22px;
+}
+
+.thumb>img {
+  height: 160px;
+  width: 160px;
+}
+
+.content>.title {
+  margin: 0 20px 3px;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  color: #212121;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.content>.desc {
+  height: 18px;
+  margin: 0 20px 12px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  color: #b0b0b0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.content>.price>i {
+  font-style: normal;
+  color: #ff6709;
+}
+
+.content>.price>span {
+  text-decoration: line-through;
+}
+
+.swiper-control {
+  position: absolute;
+  right: 0;
+  top: -36px;
+}
+
+.swiper-control>div {
+  float: left;
+  width: 24px;
+  height: 16px;
+  padding: 3px 5px;
+  text-align: center;
+  line-height: 16px;
+  border: 1px solid #e0e0e0;
+  color: #e0e0e0;
+  margin-left: -1px;
+  cursor: default;
+}
+
+.swiper-control>div.active {
+  cursor: pointer;
+  color: #b0b0b0;
+}
+
+.swiper-control>div.active:hover {
+  color: #ff6700;
+}
+
+
+/* 具体类目 小米秒杀结束 */
+
+
+/* 广告图 */
+
+.home-banner-box {
+  height: 120px;
+  margin: 22px 0;
+  overflow: hidden;
+}
+
+
+/* 手机开始 */
+
+.box-bd>.span4 {
+  float: left;
+  margin-bottom: 14px;
+}
+
+.box-bd>.span4 li {
+  transition: all 0.2s;
+}
+
+.home-shouji .span4 a {
+  display: block;
+  height: 614px;
+}
+
+.box-bd>.span16 {
+  float: left;
+  margin-left: 14px;
+  width: 978px;
+}
+
+.shouji-list-box {
+  height: 614px;
+}
+
+.shouji-list-box li {
+  width: 234px;
+  background-color: #fff;
+  float: left;
+  margin-left: 14px;
+  margin-bottom: 14px;
+  transition: all 0.2s;
+}
+
+.shouji-list-box li>a {
+  display: block;
+  height: 260px;
+  padding: 20px 0;
+}
+
+.shouji-list-box li:nth-child(1),
+.shouji-list-box li:nth-child(5) {
+  margin-left: 0;
+}
+
+.shouji-list-box li:hover,
+.box-bd>.span4 li:hover {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  /* transform: translateZ(10%); */
+}
+
+.more {
+  position: absolute;
+  right: 0;
+  top: -36px;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.more:hover {
+  color: #ff6700;
+  cursor: pointer;
+}
+
+
+/* 手机结束 */
+
+
+/* 侧边固定导航开始 */
+
+.aside-nav {
+  position: fixed;
+  right: 0;
+  top: 280px;
+}
+
+.aside-nav-box {
+  text-align: center;
+}
+
+.aside-nav-box li {
+  width: 80px;
+  height: 88px;
+  border: 1px solid #f5f5f5;
+  margin-top: -1px;
+}
+
+.aside-nav-box li>a {
+  display: block;
+  height: 88px;
+  background-color: #fff;
+}
+
+.aside-nav-box li>a>img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding-top: 18px;
+  margin: 0 auto 9px;
+}
+
+.aside-nav-box li>a>span {
+  color: #757575;
+  transition: all .2s;
+}
+
+.aside-nav-box li:last-child {
+  margin-top: 20px;
+}
+
+.goback {
+  opacity: 0;
+}
+
+
+/* 侧边固定导航结束*/
+
+
+/* 以下 js 相关样式 */
+
+
+/* 下载app 下拉 */
+
+.topbar-download {
+  position: relative;
+}
+
+.topbar-download .appcode {
+  position: absolute;
+  width: 124px;
+  /* height: 148px; */
+  height: 0;
+  font-size: 14px;
+  text-align: center;
+  z-index: 4;
+  top: 40px;
+  left: 50%;
+  margin-left: -55px;
+  color: #333;
+  line-height: 1;
+  background-color: #fff;
+  box-shadow: 0 1px 5px #aaa;
+  transition: height .3s;
+  overflow: hidden;
+}
+
+.appcode>img {
+  display: block;
+  width: 90px;
+  height: 90px;
+  margin: 18px auto 12px;
+}
+
+.topbar-download.active::before {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  top: 36px;
+  left: 50%;
+}
+
+
+/* 下载app 下拉  结束*/
+
+
+/* 购物车下拉 */
+
+.cart-box {
+  top: 40px;
+  right: 0;
+  position: absolute;
+  width: 300px;
+  height: 0;
+  background-color: #fff;
+  box-shadow: 0 1px 10px #aaa;
+  z-index: 5;
+  transition: height .3s;
+  overflow: hidden;
+}
+
+.cart-box>.msg {
+  color: #555;
+  padding: 20px 0;
+  margin: 25px 56px;
+  line-height: 1.2;
+}
+
+
+/* 购物车下拉 结束 */
+
+
+/* 搜索框下拉 */
+
+.search-pre {
+  position: absolute;
+  width: 243px;
+  border: 1px solid #ff6700;
+  top: 49px;
+  z-index: 1;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.search-pre>ul>li>a {
+  display: block;
+  color: #555;
+  font-size: 12px;
+  padding: 8px 0 8px 10px;
+}
+
+.search-pre>ul>li>a:hover {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+
+
+/* 搜索框下拉 结束*/
+
+
+/* header 导航栏下拉 */
+
+.nav-item-pre {
+  position: absolute;
+  width: 100%;
+  top: 100px;
+  z-index: 6;
+  /* height: 150px; */
+  height: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 8px #aaa;
+  overflow: hidden;
+  transition: all .3s;
+}
+
+
+/* header 导航栏下拉 结束 */
