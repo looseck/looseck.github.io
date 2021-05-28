@@ -1,0 +1,380 @@
+@import url(../../../css/common.css);
+body,
+html,
+.app {
+  height: 100%;
+  font-family: Arial, Helvetica, '微软雅黑', sans-serif;
+}
+
+.aside {
+  width: 375px;
+  height: 100%;
+  position: fixed;
+}
+
+.aside>.aside-layout {
+  background: url(../img/banner.jpg) no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  height: 100%;
+  /* height: 937px; */
+}
+
+
+/* 头部区域 开始 */
+
+.content {
+  margin-left: 375px;
+  background-color: #efefef;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 40px;
+  padding: 20px;
+}
+
+
+/* 头部 logo */
+
+.logo {
+  float: left;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: 0.1em;
+}
+
+.logo>img {
+  width: 40px;
+  height: 40px;
+  vertical-align: top;
+}
+
+
+/* 头部 导航栏 */
+
+.header-nav {
+  float: right;
+  display: flex;
+  height: 40px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.nav-items {
+  display: flex;
+}
+
+.nav-items>li>a,
+.area {
+  margin: 0 10px;
+  display: inline-block;
+  line-height: 40px;
+  height: 40px;
+  color: #838383;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dvi {
+  width: 0;
+  height: 10px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  opacity: 0.7;
+}
+
+.area {
+  position: relative;
+}
+
+.area-con::after {
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 3px;
+  top: 4px;
+  background: url(../img/up.png) no-repeat;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.nav-items>li>a:hover,
+.area:hover .area-con {
+  color: rgb(255, 105, 0);
+}
+
+.area:hover .dropdown {
+  height: 96px;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 4px #ccc;
+  height: 0;
+  overflow: hidden;
+  transition: all .2s;
+  left: 0;
+}
+
+.dropdown>div {
+  padding: 4px 8px;
+  text-align: center;
+  transition: all .2s;
+}
+
+.dropdown>div:hover {
+  background-color: rgba(240, 209, 107, 0.658);
+}
+
+
+/* 头部 结束 */
+
+
+/* main 区域 开始 */
+
+.main {
+  padding-top: 88.5px;
+  height: 685px;
+}
+
+.main>.container {
+  width: 360px;
+  /* height: 520px; */
+  padding: 40px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+
+/* 头部 登录注册 切换 */
+
+.nav-scroll {
+  height: 40px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.nav-scroll>div {
+  flex: 0, 0, auto;
+  margin-right: 20px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.nav-scroll>div.active {
+  color: #000;
+}
+
+
+/* 表单区域 */
+
+.form {
+  padding: 20px 2px 0;
+  box-sizing: border-box;
+  /* height: 355px; */
+  overflow: hidden;
+}
+
+.box {
+  /* overflow: hidden; */
+  display: flex;
+  width: 100%;
+  animation-play-state: paused;
+  animation-duration: .4s;
+  animation-fill-mode: forwards;
+  /* animation-timing-function: ease-in; */
+}
+
+.register {
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: all .3s;
+  opacity: 0;
+}
+
+.login {
+  overflow: hidden;
+  width: 100%;
+  height: 355px;
+  flex-shrink: 0;
+  transition: all .3s;
+  opacity: 1;
+}
+
+.login>div,
+.register>div {
+  position: relative;
+}
+
+.login>div>input,
+.register>div>input {
+  width: 100%;
+  outline-style: none;
+  height: 60px;
+  padding: 30px 20px 10px;
+  font-size: 17px;
+  border: none;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+}
+
+.login>div>label,
+.register>div>label {
+  position: absolute;
+  user-select: none;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  height: 20px;
+  font-weight: 400;
+  font-size: 17px;
+  color: rgba(0, 0, 0, .4);
+  line-height: 20px;
+  transition: top .15s cubic-bezier(.4, 0, .2, 1), font-size .15s cubic-bezier(.4, 0, .2, 1), color .15s cubic-bezier(.4, 0, .2, 1);
+  max-width: calc(100% - 20px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: text;
+}
+
+.password,
+.phone,
+.v-code {
+  margin-top: 20px;
+}
+
+.submit {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: #fff;
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  background-color: #ff5c00;
+  opacity: 0.4;
+  cursor: default;
+  border-radius: 4px;
+}
+
+.actions {
+  overflow: hidden;
+  height: 35px;
+}
+
+.actions>.forget {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.actions>.phonenum {
+  float: right;
+  margin-bottom: 10px;
+}
+
+.actions>div>a {
+  color: #ff5c00;
+  font-size: 17px;
+}
+
+.register .agree {
+  font-size: 14px;
+  font-weight: 400;
+  color: #aaa;
+  line-height: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+
+/* 其他方式登录 */
+
+.other-login-title {
+  line-height: 40px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+.other-login-items {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.other-login-items>a {
+  display: block;
+  height: 46px;
+  width: 46px;
+  margin: 0 12px;
+}
+
+.other-login-items>a>img {
+  height: 46px;
+  width: 46px;
+}
+
+
+/* main 区域 结束 */
+
+
+/* footer区域 */
+
+.footer {
+  padding: 0 20px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: 20px;
+  color: #999;
+  font-size: 12px;
+}
+
+.footer>a {
+  color: #999;
+}
+
+.box.active {
+  animation-play-state: running;
+}
+
+
+/* footer区域 结束 */
+
+@keyframes slide_log {
+  from {
+    transform: translateX(-356px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide_reg {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-356px);
+  }
+}

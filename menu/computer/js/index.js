@@ -23,10 +23,13 @@ for (let i = 0; i < nums.length; i++) {
     } else if (bot.innerHTML.length >= 14) {
       return
     }
-    if (reg.indexOf(_top.innerHTML.charAt(_top.innerHTML.length - 1)) <= 0) {
-      _top.innerHTML = Number.parseFloat(_top.innerHTML + this.innerHTML)
+    if (bot.innerHTML == '0') {
+      bot.innerHTML = ''
     }
-    bot.innerHTML = Number.parseFloat(bot.innerHTML + this.innerHTML)
+    if (reg.indexOf(_top.innerHTML.charAt(_top.innerHTML.length - 1)) <= 0) {
+      _top.innerHTML = bot.innerHTML + Number.parseFloat(this.innerHTML)
+    }
+    bot.innerHTML = bot.innerHTML + Number.parseFloat(this.innerHTML)
   }
 }
 
