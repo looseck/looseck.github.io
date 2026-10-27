@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070d">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="数字基地：一个集小游戏、实用工具与个人档案于一体的原生极客门户。">
+  <title>数字基地</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23070b14'/%3E%3Cpath d='M18 20l14 12-14 12' stroke='%2364e7ff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M34 44h14' stroke='%23b08cff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="modules/games/snake.css">
+  <link rel="stylesheet" href="modules/games/number-merge.css">
+  <link rel="stylesheet" href="modules/tools/electricity.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-skip-link>跳到主要内容</a>
+
+  <!-- Ambient background -->
+  <div class="site-backdrop" aria-hidden="true">
+    <div class="site-grid"></div>
+    <div class="site-orb site-orb--one"></div>
+    <div class="site-orb site-orb--two"></div>
+    <div class="site-orb site-orb--three"></div>
+  </div>
+
+  <!-- Shared navigation -->
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#portals" aria-label="返回数字基地首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="m5.5 7 4.4 5-4.4 5M12.8 17h5.7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">MY GEEK BASE</span>
+          <span class="brand-sub">PERSONAL_NODE // 01</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主导航">
+        <a class="nav-link" href="#portals" data-nav="portals" aria-current="page">
+          <span class="nav-link__index">01</span>首页
+        </a>
+        <a class="nav-link" href="#arcade" data-nav="arcade">
+          <span class="nav-link__index">02</span>游戏大厅
+        </a>
+        <a class="nav-link" href="#tools" data-nav="tools">
+          <span class="nav-link__index">03</span>工具箱
+        </a>
+        <a class="nav-link" href="#about" data-nav="about">
+          <span class="nav-link__index">04</span>关于我
+        </a>
+      </nav>
+
+      <span class="nav-status" aria-label="站点在线">
+        <span class="nav-status__dot" aria-hidden="true"></span>
+        ONLINE
+      </span>
+    </div>
+  </header>
+
+  <main class="site-main" id="main" tabindex="-1">
+    <!-- VIEW: portals -->
+    <section class="view view--portals" id="view-portals" data-view="portals" aria-labelledby="portals-title">
+      <div class="hero container" aria-labelledby="hero-title">
+        <div class="hero__status">
+          <span class="hero__status-dot" aria-hidden="true"></span>
+          <span>NODE_01 · ONLINE</span>
+          <span class="hero__status-divider" aria-hidden="true"></span>
+          <span class="hero__status-extra">VISITOR ACCESS GRANTED</span>
+        </div>
+
+        <h1 class="hero-title" id="hero-title">
+          <span class="hero-title__word hero-title__word--solid">MY GEEK</span>
+          <span class="hero-title__word hero-title__word--accent">BASE</span>
+        </h1>
+
+        <div class="hero__rule" aria-hidden="true">
+          <span class="hero__rule-diamond"></span>
+        </div>
+
+        <p class="hero__lead">
+          一个属于代码、游戏与好奇心的数字基地。<br>
+          这里没有标准答案，只有持续加载的<em>新模块</em>。
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#arcade">
+            进入游戏大厅
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="btn btn--ghost" href="#tools">
+            打开工具箱
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="hero-hud" role="group" aria-label="基地运行状态">
+          <div class="hero-hud__console" aria-hidden="true">
+            <span class="hero-hud__prompt">$</span>
+            <span class="hero-hud__command">root@geek-base:~$ explore --all-modules</span>
+            <span class="hero-hud__cursor"></span>
+          </div>
+          <dl class="hero-hud__stats">
+            <div class="hud-stat">
+              <dt>ARCADE</dt>
+              <dd>01 READY</dd>
+            </div>
+            <div class="hud-stat">
+              <dt>STACK</dt>
+              <dd>VANILLA JS</dd>
+            </div>
+            <div class="hud-stat">
+              <dt>STATUS</dt>
+              <dd class="is-online">ONLINE</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <div class="ticker__group">
+            <span class="ticker__item">PLAY IN THE GRID</span>
+            <span class="ticker__item">NEON SNAKE // READY</span>
+            <span class="ticker__item">BUILD IN THE DARK</span>
+            <span class="ticker__item">TOUCH &amp; KEYBOARD</span>
+            <span class="ticker__item">NO FRAMEWORK, ALL FUN</span>
+            <span class="ticker__item">STAY CURIOUS</span>
+            <span class="ticker__item">MORE MODULES INCOMING</span>
+            <span class="ticker__item">MY GEEK BASE</span>
+          </div>
+          <div class="ticker__group">
+            <span class="ticker__item">PLAY IN THE GRID</span>
+            <span class="ticker__item">NEON SNAKE // READY</span>
+            <span class="ticker__item">BUILD IN THE DARK</span>
+            <span class="ticker__item">TOUCH &amp; KEYBOARD</span>
+            <span class="ticker__item">NO FRAMEWORK, ALL FUN</span>
+            <span class="ticker__item">STAY CURIOUS</span>
+            <span class="ticker__item">MORE MODULES INCOMING</span>
+            <span class="ticker__item">MY GEEK BASE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section container" aria-labelledby="portals-title">
+        <div class="section-heading">
+          <div class="section-heading__copy">
+            <p class="eyebrow eyebrow--accent">ACCESS_POINTS // 模块入口</p>
+            <h2 class="section-title" id="portals-title" tabindex="-1">选择你的<span class="section-title__accent">入口</span></h2>
+          </div>
+          <p class="section-note">三个坐标，一条航线。<br>所有模块从同一个基地出发。</p>
+        </div>
+
+        <div class="portal-grid">
+          <!-- 01 / Game lobby -->
+          <a class="portal-card portal-card--arcade" href="#arcade" aria-label="进入游戏大厅，查看小游戏">
+            <span class="portal-card__watermark" aria-hidden="true">01</span>
+            <div class="portal-card__top">
+              <span class="portal-card__code">MODULE_01 // ARCADE</span>
+              <span class="tag tag--live"><span class="tag__dot" aria-hidden="true"></span>ONLINE</span>
+            </div>
+
+            <span class="portal-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7.5 8.5H4.8A2.3 2.3 0 0 0 2.5 10.8v4.7a3 3 0 0 0 5.4 1.7l1.2-1.6h5.8l1.2 1.6a3 3 0 0 0 5.4-1.7v-4.7a2.3 2.3 0 0 0-2.3-2.3h-2.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.2 12.2v3m-1.5-1.5h3M16.3 12.2h.1m2.2 1.7h.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M10 8.5V6.2A2.2 2.2 0 0 1 12.2 4h1.6a2.2 2.2 0 0 1 2.2 2.2v2.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+
+            <div class="portal-card__content">
+              <p class="portal-card__kicker">PLAY_ZONE</p>
+              <h3 class="portal-card__title">游戏大厅</h3>
+              <p class="portal-card__desc">小游戏与实验场。霓虹贪吃蛇已经接入，支持键盘、触屏与虚拟方向键。</p>
+              <div class="portal-card__meta" aria-hidden="true">
+                <span>02 GAMES</span>
+                <span>CANVAS</span>
+                <span>TOUCH READY</span>
+              </div>
+            </div>
+
+            <div class="portal-card__foot">
+              <span>进入街机舱</span>
+              <span class="portal-card__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- 02 / Toolbox -->
+          <a class="portal-card portal-card--utility" href="#tools" aria-label="打开工具箱，查看实用工具">
+            <span class="portal-card__watermark" aria-hidden="true">02</span>
+            <div class="portal-card__top">
+              <span class="portal-card__code">MODULE_02 // UTILITY</span>
+              <span class="tag tag--live"><span class="tag__dot" aria-hidden="true"></span>ONLINE</span>
+            </div>
+
+            <span class="portal-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="m13.4 2.8-8 10.4h5.4l-.6 8 8-10.4h-5.4l.6-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+
+            <div class="portal-card__content">
+              <p class="portal-card__kicker">UTILITY_ZONE</p>
+              <h3 class="portal-card__title">工具箱</h3>
+              <p class="portal-card__desc">实用工具与数据小玩意。电费管家已经迁移，数据只需留在自己的浏览器里。</p>
+              <div class="portal-card__meta" aria-hidden="true">
+                <span>LOCAL FIRST</span>
+                <span>NO CLOUD</span>
+                <span>01 TOOL</span>
+              </div>
+            </div>
+
+            <div class="portal-card__foot">
+              <span>打开工具箱</span>
+              <span class="portal-card__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- 03 / About -->
+          <a class="portal-card portal-card--about" href="#about" aria-label="查看关于我的个人信息">
+            <span class="portal-card__watermark" aria-hidden="true">03</span>
+            <div class="portal-card__top">
+              <span class="portal-card__code">MODULE_03 // IDENTITY</span>
+              <span class="tag tag--live"><span class="tag__dot" aria-hidden="true"></span>ONLINE</span>
+            </div>
+
+            <span class="portal-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.2a8.8 8.8 0 0 0-8.8 8.8c0 3.1 1.6 5.8 4 7.4V21m9.6-9c0 3.3-1.2 6-3 7.6M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 3.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+
+            <div class="portal-card__content">
+              <p class="portal-card__kicker">IDENTITY_FILE</p>
+              <h3 class="portal-card__title">关于我</h3>
+              <p class="portal-card__desc">基地建造者、深夜玩家，以及一份关于这个数字空间的简短档案。</p>
+              <div class="portal-card__meta" aria-hidden="true">
+                <span>PERSONAL</span>
+                <span>BUILD_LOG</span>
+              </div>
+            </div>
+
+            <div class="portal-card__foot">
+              <span>读取档案</span>
+              <span class="portal-card__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div class="expansion-note">
+          <span class="expansion-note__mark" aria-hidden="true">+</span>
+          <p>基地仍在扩建。更多小游戏与实用工具会以独立模块持续接入。</p>
+          <span class="expansion-note__code">SYS_EXPANDABLE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: arcade list -->
+    <section class="view view--catalog" data-view="arcade" aria-labelledby="arcade-title" hidden>
+      <div class="container view-shell">
+        <a class="view-back" href="#portals">← 返回基地</a>
+        <h2 class="view-title" id="arcade-title" tabindex="-1">游戏<span>大厅</span></h2>
+        <p class="view-subtitle">小游戏与实验场</p>
+        <ul class="module-grid" id="game-list" aria-label="游戏列表"></ul>
+      </div>
+    </section>
+
+    <!-- VIEW: game detail -->
+    <section class="view view--detail" data-view="game" hidden>
+      <div id="game-view-root"></div>
+    </section>
+
+    <!-- VIEW: tools list -->
+    <section class="view view--catalog" data-view="tools" aria-labelledby="tools-title" hidden>
+      <div class="container view-shell">
+        <a class="view-back" href="#portals">← 返回基地</a>
+        <h2 class="view-title" id="tools-title" tabindex="-1">工具<span>箱</span></h2>
+        <p class="view-subtitle">实用工具与数据小玩意</p>
+        <ul class="module-grid" id="tool-list" aria-label="工具列表"></ul>
+      </div>
+    </section>
+
+    <!-- VIEW: tool detail -->
+    <section class="view view--detail" data-view="tool" hidden>
+      <div id="tool-view-root"></div>
+    </section>
+
+    <!-- VIEW: about -->
+    <section class="view view--about" data-view="about" aria-labelledby="about-title" hidden>
+      <div class="container view-shell">
+        <a class="view-back" href="#portals">← 返回基地</a>
+        <div class="about-panel glass">
+          <div class="about-copy">
+            <p class="eyebrow eyebrow--accent">IDENTITY_FILE // ABOUT</p>
+            <h2 class="about-title" id="about-title" tabindex="-1">关于这个<span>基地</span></h2>
+            <p>
+              你好，我是这个基地的建造者。这里是我的数字自留地：存放游戏、实用工具，也存放一些还没命名的想法。
+            </p>
+            <p>
+              整站使用原生 HTML、CSS 与 JavaScript 搭建，没有框架负重。视觉可以很未来，结构必须保持简单——让每一个新模块都能干净地接入。
+            </p>
+            <div class="about-chips" aria-label="技术栈">
+              <span class="about-chip">HTML5</span>
+              <span class="about-chip">CSS3</span>
+              <span class="about-chip">VANILLA_JS</span>
+              <span class="about-chip">ES_MODULES</span>
+              <span class="about-chip">RESPONSIVE</span>
+            </div>
+          </div>
+
+          <aside class="about-console" aria-label="基地配置信息">
+            <div class="console-bar" aria-hidden="true">
+              <span class="console-bar__dot console-bar__dot--red"></span>
+              <span class="console-bar__dot console-bar__dot--amber"></span>
+              <span class="console-bar__dot console-bar__dot--green"></span>
+              <span class="console-bar__path">~/geek-base/config</span>
+            </div>
+            <dl class="console-list">
+              <div>
+                <dt>OWNER</dt>
+                <dd>THE_GEEK</dd>
+              </div>
+              <div>
+                <dt>NODE</dt>
+                <dd>PERSONAL_01</dd>
+              </div>
+              <div>
+                <dt>STACK</dt>
+                <dd>VANILLA_HTML_CSS_JS</dd>
+              </div>
+              <div>
+                <dt>ROUTE</dt>
+                <dd>HASH_ROUTER</dd>
+              </div>
+              <div>
+                <dt>STATUS</dt>
+                <dd class="is-online">ONLINE</dd>
+              </div>
+            </dl>
+            <p class="console-quote">Stay curious. Keep building.<span class="console-quote__cursor" aria-hidden="true"></span></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand__mark" aria-hidden="true"></span>
+        <span>MY GEEK BASE © 2026</span>
+      </div>
+      <div class="footer-meta">
+        <span>DESIGNED IN THE DARK</span>
+        <span>HTML / CSS / JS</span>
+        <span>BUILD 02</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
