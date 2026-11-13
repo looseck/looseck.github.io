@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the electricity balance and append it to data.json.
-
-The browser never talks to the utility website directly. This script runs in
-GitHub Actions twice per hour (at minute 5) and commits the generated JSON so
-the static site can load it with a single same-origin request.
-"""
+"""Fetch the electricity balance and append it to data.json."""
 
 from __future__ import annotations
 
@@ -18,21 +13,19 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-PAY_URL = "http://www.wap.cnyiot.com/nat/pay.aspx?mid=19500698774"
+# 👇 关键修改 1：改为 HTTPS 协议
+PAY_URL = "https://www.wap.cnyiot.com/nat/pay.aspx?mid=19500698774"
 DATA_FILE = Path(__file__).resolve().parent / "data.json"
 CHINA_TZ = timezone(timedelta(hours=8))
 REQUEST_TIMEOUT = (5, 25)
 MAX_BALANCE = 1e12
 
-# <span>剩余金额:</span><label style="...">84.64</label>
 BALANCE_PATTERN = re.compile(
     r"<span[^>]*>\s*剩余金额\s*[:：]?\s*</span>\s*"
     r"<label[^>]*>\s*(-?\s*[0-9][0-9,]*(?:\.[0-9]+)?)\s*</label>",
     re.IGNORECASE | re.DOTALL,
 )
 
-# Tolerates minor markup changes while still anchoring on the amount field,
-# never the similarly formatted "剩余电量" field.
 BALANCE_FALLBACK_PATTERN = re.compile(
     r"剩余金额[\s\S]{0,500}?(-?\s*[0-9][0-9,]*(?:\.[0-9]+)?)",
     re.IGNORECASE,
@@ -60,28 +53,46 @@ def build_session() -> requests.Session:
     adapter = HTTPAdapter(max_retries=retry)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
+    
+    # 👇 关键修改 2：增加更逼真的请求头，加入 Referer 和 中文语言环境
     session.headers.update(
         {
             "User-Agent": USER_AGENT,
-            "Accept": "text/html,application/xhtml+xml",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
             "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Referer": "https://www.wap.cnyiot.com/", # 伪装从首页点进来
         }
     )
     return session
 
 
 def fetch_page(session: requests.Session) -> str:
-    response = session.get(PAY_URL, timeout=REQUEST_TIMEOUT)
-    response.raise_for_status()
-    response.encoding = "utf-8"
-    if not response.text.strip():
-        raise ValueError("upstream page was empty")
-    return response.text
+    try:
+        # 先尝试请求目标页面
+        response = session.get(PAY_URL, timeout=REQUEST_TIMEOUT)
+        
+        # 如果 HTTPS 被拒绝或者报错，尝试降级回 HTTP 再试一次
+        if response.status_code in (403, 405):
+            print(f"[scrape] HTTPS returned {response.status_code}, trying HTTP...")
+            response = session.get(PAY_URL.replace("https://", "http://"), timeout=REQUEST_TIMEOUT)
+
+        response.raise_for_status()
+        # 自动识别编码
+        response.encoding = response.apparent_encoding 
+        if not response.text.strip():
+            raise ValueError("upstream page was empty")
+        return response.text
+    except Exception as e:
+        raise RuntimeError(f"Network request failed: {e}")
 
 
 def parse_balance(page_html: str) -> float:
     match = BALANCE_PATTERN.search(page_html) or BALANCE_FALLBACK_PATTERN.search(page_html)
     if not match:
+        # 如果找不到，可能是被拦截了，打印前 200 字符看看是不是验证码或防火墙页面
+        print(f"[debug] page head: {page_html[:200]}")
         raise ValueError("could not find the 剩余金额 field in the page")
 
     raw_value = match.group(1).replace(",", "").replace(" ", "")
@@ -117,7 +128,6 @@ def load_history() -> list[dict]:
 
 
 def save_history(history: list[dict]) -> None:
-    """Atomically replace data.json so a partial write cannot corrupt the site."""
     history.sort(key=lambda entry: entry["time"])
     serialized = json.dumps(history, ensure_ascii=False, indent=2) + "\n"
     temp_file = DATA_FILE.with_name(f"{DATA_FILE.name}.tmp")
@@ -152,7 +162,7 @@ def main() -> int:
         save_history(history)
         print(f"[scrape] {action} {timestamp} balance={balance:.2f}; total records={len(history)}")
         return 0
-    except Exception as exc:  # requests errors, HTTP errors, parsing and JSON errors
+    except Exception as exc:
         print(f"[scrape] failed: {exc}", file=sys.stderr)
         return 1
 
