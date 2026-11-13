@@ -1403,6 +1403,403 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+   Automatic live balance
+   Rendered from the pre-generated data.json. The chart is a lightweight SVG
+   (50 points max) to avoid loading a chart library inside the lazy module.
+   -------------------------------------------------------------------------- */
+
+.mod-electricity-live {
+  --mod-electricity-live-accent: var(--mod-electricity-accent);
+  position: relative;
+  margin-bottom: 1rem;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 100% at 4% 0%, rgba(255, 209, 102, 0.13), transparent 63%),
+    linear-gradient(155deg, rgba(26, 30, 38, 0.92), rgba(9, 14, 24, 0.94));
+  border: 1px solid rgba(255, 209, 102, 0.22);
+  border-radius: 25px;
+  box-shadow:
+    0 26px 68px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.mod-electricity-live::after {
+  position: absolute;
+  top: -80px;
+  right: -35px;
+  width: 270px;
+  height: 270px;
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.1), transparent 68%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.mod-electricity-live--low {
+  --mod-electricity-live-accent: var(--mod-electricity-danger);
+  border-color: rgba(255, 114, 133, 0.27);
+  background:
+    radial-gradient(ellipse 80% 100% at 4% 0%, rgba(255, 114, 133, 0.12), transparent 63%),
+    linear-gradient(155deg, rgba(31, 27, 36, 0.94), rgba(13, 12, 20, 0.96));
+}
+
+.mod-electricity-live-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mod-electricity-live-title {
+  margin: 0;
+  color: #f2f7fd;
+  font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+}
+
+.mod-electricity-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+  min-height: 2.5rem;
+  padding: 0 0.8rem;
+  color: var(--mod-electricity-live-accent);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 0.6rem;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.mod-electricity-refresh:focus-visible {
+  outline: 2px solid var(--mod-electricity-live-accent);
+  outline-offset: 3px;
+}
+
+.mod-electricity-refresh:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.mod-electricity-refresh-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.mod-electricity-live-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.mod-electricity-live-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 0.25rem 0;
+}
+
+.mod-electricity-live-value {
+  margin: 0;
+  overflow: hidden;
+  color: var(--mod-electricity-live-accent);
+  font-family: var(--mod-electricity-font-mono);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 40px rgba(255, 209, 102, 0.1);
+  white-space: nowrap;
+}
+
+.mod-electricity-live--low .mod-electricity-live-value {
+  color: var(--mod-electricity-danger);
+  text-shadow: 0 0 40px rgba(255, 114, 133, 0.14);
+}
+
+.mod-electricity-live-updated {
+  margin: 0.65rem 0 0;
+  color: #a8b4c2;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.mod-electricity-live-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+}
+
+.mod-electricity-live-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.8rem;
+  padding: 0.3rem 0.6rem;
+  color: #92a0b3;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.mod-electricity-live-state::before {
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  content: "";
+}
+
+.mod-electricity-live-state[data-state="live"] {
+  color: var(--mod-electricity-mint);
+  background: rgba(84, 221, 178, 0.055);
+  border-color: rgba(84, 221, 178, 0.18);
+}
+
+.mod-electricity-live-state[data-state="cached"] {
+  color: #d9c38b;
+  background: rgba(255, 209, 102, 0.055);
+  border-color: rgba(255, 209, 102, 0.16);
+}
+
+.mod-electricity-live-state[data-state="waiting"] {
+  color: #eac076;
+  background: rgba(234, 192, 118, 0.055);
+  border-color: rgba(234, 192, 118, 0.18);
+}
+
+.mod-electricity-live-state[data-state="error"] {
+  color: var(--mod-electricity-danger);
+  background: rgba(255, 114, 133, 0.055);
+  border-color: rgba(255, 114, 133, 0.18);
+}
+
+.mod-electricity-live-low {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  padding: 0.3rem 0.6rem;
+  color: #ffc0c9;
+  background: rgba(255, 114, 133, 0.075);
+  border: 1px solid rgba(255, 114, 133, 0.22);
+  border-radius: 999px;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.mod-electricity-live-schedule {
+  margin: 0.75rem 0 0;
+  color: #748397;
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.mod-electricity-live-figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0.85rem 0.95rem 0.65rem;
+  margin: 0;
+  background: rgba(3, 7, 13, 0.43);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 14px;
+}
+
+.mod-electricity-live-chart-head,
+.mod-electricity-live-chart-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.mod-electricity-live-chart-label {
+  color: #a8b5c6;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.mod-electricity-live-chart-range {
+  color: var(--mod-electricity-live-accent);
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.mod-electricity-live-chart-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 9.25rem;
+  margin-top: 0.35rem;
+}
+
+.mod-electricity-live-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--mod-electricity-live-accent);
+  overflow: hidden;
+}
+
+.mod-electricity-live--low .mod-electricity-live-chart {
+  color: var(--mod-electricity-danger);
+}
+
+.mod-electricity-chart-guide {
+  stroke: rgba(154, 199, 255, 0.1);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.mod-electricity-chart-area {
+  fill: currentColor;
+  opacity: 0.09;
+  stroke: none;
+}
+
+.mod-electricity-chart-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.mod-electricity-chart-dot {
+  fill: currentColor;
+  stroke: #07101c;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.mod-electricity-live-chart-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0.75rem;
+  color: #7d8b9d;
+  background: linear-gradient(180deg, transparent, rgba(3, 7, 13, 0.52));
+  font-size: 0.85rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.mod-electricity-live-chart-foot {
+  color: #6e7d8f;
+  font-family: var(--mod-electricity-font-mono);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
+.mod-electricity-live-note {
+  position: relative;
+  z-index: 1;
+  margin: 1rem 0 0;
+  color: #748397;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mod-electricity-refresh:not(:disabled):hover {
+    color: #1b1405;
+    background: var(--mod-electricity-live-accent);
+    border-color: var(--mod-electricity-live-accent);
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 900px) {
+  .mod-electricity-live-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mod-electricity-live-figure {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .mod-electricity-live {
+    padding: 1.25rem 1.1rem;
+    border-radius: 20px;
+  }
+
+  .mod-electricity-live-head {
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .mod-electricity-refresh {
+    margin-left: auto;
+  }
+
+  .mod-electricity-live-value {
+    font-size: clamp(2.25rem, 12vw, 3rem);
+  }
+
+  .mod-electricity-live-figure {
+    padding: 0.75rem 0.8rem 0.6rem;
+  }
+
+  .mod-electricity-live-chart-wrap {
+    min-height: 8.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .mod-electricity-live {
+    padding: 1.1rem 0.95rem;
+  }
+
+  .mod-electricity-live-chart-foot {
+    font-size: 0.75rem;
+  }
+
+  .mod-electricity-live-state,
+  .mod-electricity-live-low {
+    font-size: 0.75rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mod-electricity-root *,
   .mod-electricity-root *::before,

@@ -1,0 +1,39 @@
+我有一个已经部署在 GitHub Pages 的个人主页仓库（looseck.github.io），现在我想修改之前“电费管家”的功能。这个仓库已经有很多文件（比如 index.html, style.css, app.js 等），请帮我生成以下 3 个文件。
+
+需求： 每 2 小时抓取一次电费余额，保存为 JSON，并通过一个独立的 HTML 页面展示折线图。
+
+1. 抓取脚本 scrape.py（放在仓库根目录）
+
+使用 requests 访问：http://www.wap.cnyiot.com/nat/pay.aspx?mid=19500698774
+
+用正则表达式提取余额（HTML 结构如 <span>剩余金额：</span><label style="...">143.92</label>，提取出 143.92）。
+
+将数据追加保存到根目录的 data.json 中。数据格式为数组：[{"time": "2026-11-13 14:00", "balance": 143.92}, ...]。
+
+如果抓取失败，请捕获异常并退出，不要写入错误数据。
+
+2. GitHub Actions 工作流 .github/workflows/scrape.yml
+
+定时任务：每 2 小时的第 5 分钟运行（5 */2 * * *），支持手动运行（workflow_dispatch）。
+
+必须配置 permissions: contents: write。
+
+步骤：checkout -> 安装 Python 和 requests -> 运行 scrape.py -> 自动 commit 并 push 更新后的 data.json 到主分支。
+
+3. 独立展示页面 power.html（放在仓库根目录）
+
+这是一个独立的页面，不会影响现有的 index.html。页面头部有一个简单的返回主页按钮（链接到 /）。
+
+引入 Chart.js CDN，使用移动端优先的深色主题（背景色 #090b10，卡片色 #141821，文字色 #f4f6fa）。
+
+页面加载时，fetch('./data.json') 获取数据。
+
+顶部显示“当前余额”（最新的一条数据）和“最后更新时间”。
+
+下方展示折线图（平滑曲线，主色调琥珀色 #ffd166），只展示最新的 50 条数据。
+
+余额低于 20 元时，余额数字和折线图变红（#ff7285）。
+
+如果 data.json 不存在，显示“数据生成中，请稍候...”。
+
+请给出这 3 个文件的完整代码，并告诉我如何将它们上传到我现有的 GitHub 仓库中。”
