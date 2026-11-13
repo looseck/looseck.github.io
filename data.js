@@ -32,8 +32,8 @@ export const TOOLS = [
   {
     id: 'electricity',
     title: '电费管家',
-    summary: '自动同步电表余额与近 50 次趋势，同时保留只存本机的手工账本。',
-    tags: ['自动采集', '本地账本', '余额趋势'],
+    summary: '自动同步电表余额，直观看今日用量与昨日同期对比。',
+    tags: ['自动采集', '今日用量', '两日对比'],
     status: 'available',
     featured: true,
     order: 1,

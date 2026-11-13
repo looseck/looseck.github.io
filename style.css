@@ -238,12 +238,13 @@ svg {
   opacity: 0.6;
 }
 
+/* The ambient glows use pre-softened radial gradients instead of animated
+   90px blur filters. This keeps the look but removes giant filtered layers
+   from the scroll path. */
 .site-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.52;
-  will-change: transform;
+  opacity: 0.72;
 }
 
 .site-orb--one {
@@ -251,8 +252,12 @@ svg {
   left: 16%;
   width: 48vw;
   height: 48vw;
-  background: rgba(63, 112, 255, 0.25);
-  animation: orb-drift 18s ease-in-out infinite alternate;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(63, 112, 255, 0.27) 0%,
+    rgba(63, 112, 255, 0.12) 38%,
+    transparent 72%
+  );
 }
 
 .site-orb--two {
@@ -260,8 +265,12 @@ svg {
   right: -16%;
   width: 38vw;
   height: 38vw;
-  background: rgba(160, 79, 255, 0.14);
-  animation: orb-drift 23s 1.5s ease-in-out infinite alternate-reverse;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(160, 79, 255, 0.16) 0%,
+    rgba(160, 79, 255, 0.07) 40%,
+    transparent 72%
+  );
 }
 
 .site-orb--three {
@@ -269,7 +278,12 @@ svg {
   left: -10%;
   width: 44vw;
   height: 44vw;
-  background: rgba(var(--cyan-rgb), 0.075);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(var(--cyan-rgb), 0.085) 0%,
+    rgba(var(--cyan-rgb), 0.035) 42%,
+    transparent 72%
+  );
 }
 
 .site-backdrop::after {
@@ -315,14 +329,12 @@ svg {
   padding: 10px 12px 10px 16px;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.035), transparent 35%),
-    rgba(7, 11, 20, 0.72);
+    rgba(7, 11, 20, 0.96);
   border: 1px solid var(--line);
   border-radius: 20px;
   box-shadow:
     0 18px 48px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  -webkit-backdrop-filter: blur(22px) saturate(145%);
-  backdrop-filter: blur(22px) saturate(145%);
 }
 
 .nav-shell::before {
@@ -522,13 +534,11 @@ svg {
 .glass {
   background:
     linear-gradient(155deg, rgba(255, 255, 255, 0.035), transparent 38%),
-    linear-gradient(180deg, rgba(14, 21, 36, 0.7), rgba(7, 11, 20, 0.76));
+    linear-gradient(180deg, rgba(14, 21, 36, 0.92), rgba(7, 11, 20, 0.95));
   border: 1px solid var(--line);
   box-shadow:
     0 26px 68px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
-  -webkit-backdrop-filter: blur(20px) saturate(135%);
-  backdrop-filter: blur(20px) saturate(135%);
 }
 
 .btn {
@@ -682,7 +692,7 @@ svg {
   min-height: 30px;
   padding: 5px 13px;
   color: var(--text-soft);
-  background: rgba(8, 13, 23, 0.58);
+  background: rgba(8, 13, 23, 0.92);
   border: 1px solid var(--line);
   border-radius: 999px;
   font-family: var(--font-mono);
@@ -690,8 +700,6 @@ svg {
   letter-spacing: 0.13em;
   line-height: 1.4;
   text-transform: uppercase;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   animation: fade-rise 700ms var(--ease-out) backwards;
 }
 
@@ -750,9 +758,9 @@ svg {
   );
   background-clip: text;
   -webkit-background-clip: text;
+  background-position: 42% 50%;
   background-size: 180% 100%;
   filter: drop-shadow(0 0 34px rgba(var(--cyan-rgb), 0.16));
-  animation: title-gradient 9s ease-in-out infinite alternate;
 }
 
 .hero__rule {
@@ -819,10 +827,8 @@ svg {
   border-radius: 13px;
   background:
     linear-gradient(100deg, rgba(var(--cyan-rgb), 0.035), transparent 42%),
-    rgba(6, 10, 18, 0.6);
+    rgba(6, 10, 18, 0.93);
   box-shadow: 0 14px 42px rgba(0, 0, 0, 0.2);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
   animation: fade-rise 850ms 380ms var(--ease-out) backwards;
 }
 
@@ -1010,15 +1016,13 @@ svg {
   color: var(--text);
   background:
     linear-gradient(150deg, rgba(255, 255, 255, 0.035), transparent 36%),
-    linear-gradient(180deg, rgba(13, 20, 35, 0.82), rgba(7, 11, 20, 0.9));
+    linear-gradient(180deg, rgba(13, 20, 35, 0.95), rgba(7, 11, 20, 0.97));
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   box-shadow:
     0 24px 58px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
   isolation: isolate;
-  -webkit-backdrop-filter: blur(18px) saturate(130%);
-  backdrop-filter: blur(18px) saturate(130%);
   transition:
     transform 380ms var(--ease-out),
     border-color 300ms ease,
@@ -1792,15 +1796,13 @@ svg {
   min-height: 23px;
   padding: 4px 7px;
   color: var(--accent);
-  background: rgba(3, 8, 15, 0.7);
+  background: rgba(3, 8, 15, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 5px;
   font-family: var(--font-mono);
   font-size: 0.4688rem;
   letter-spacing: 0.09em;
   line-height: 1;
-  -webkit-backdrop-filter: blur(9px);
-  backdrop-filter: blur(9px);
 }
 
 .module-card__body {
@@ -2059,15 +2061,6 @@ svg {
   }
 }
 
-@keyframes title-gradient {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 100% 50%;
-  }
-}
-
 @keyframes signal-pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(var(--mint-rgb), 0.28);
@@ -2097,31 +2090,6 @@ svg {
   }
   to {
     transform: translateX(-50%);
-  }
-}
-
-@keyframes orb-drift {
-  from {
-    transform: translate3d(-3%, -2%, 0) scale(1);
-  }
-  to {
-    transform: translate3d(5%, 4%, 0) scale(1.08);
-  }
-}
-
-@keyframes card-breathe {
-  0%,
-  100% {
-    box-shadow:
-      0 30px 76px rgba(0, 0, 0, 0.34),
-      0 0 34px rgba(var(--accent-rgb), 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.055);
-  }
-  50% {
-    box-shadow:
-      0 30px 76px rgba(0, 0, 0, 0.34),
-      0 0 58px rgba(var(--accent-rgb), 0.14),
-      inset 0 1px 0 rgba(255, 255, 255, 0.075);
   }
 }
 
@@ -2164,7 +2132,6 @@ svg {
       0 30px 76px rgba(0, 0, 0, 0.34),
       0 0 48px rgba(var(--accent-rgb), 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 0.055);
-    animation: card-breathe 3.6s ease-in-out infinite;
     transform: translateY(-7px);
   }
 
