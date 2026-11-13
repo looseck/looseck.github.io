@@ -31,7 +31,7 @@ try:
 except ImportError:  # Optional: requests remains the supported fallback.
     curl_requests = None
 
-PAY_URL = "https://www.wap.cnyiot.com/nat/pay.aspx?mid=19500698774"
+PAY_URL = "http://www.wap.cnyiot.com/nat/pay.aspx?mid=19500698774"
 DATA_FILE = Path(__file__).resolve().parent / "data.json"
 CHINA_TZ = timezone(timedelta(hours=8))
 REQUEST_TIMEOUT = (5, 25)
