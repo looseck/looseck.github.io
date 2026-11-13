@@ -46,9 +46,26 @@ python -m http.server 8000
 本地测试抓取：
 
 ```powershell
-python -m pip install requests
+python -m pip install requests curl_cffi
 python scrape.py
 ```
+
+### GitHub Actions 返回 405 时
+
+如果本地直接打开计量表页面正常，但 Action 在 `Fetch balance` 步骤报：
+
+```text
+405 Client Error: Not Allowed for url: https://www.wap.cnyiot.com/nat/pay.aspx...
+```
+
+这通常不是脚本正则或页面结构问题，而是上游 **Alibaba Cloud WAF 对 GitHub 云出口 IP 的拦截或临时限流**。同一个请求从当前国内网络访问仍会返回 `200`。检测到这种情况时：
+
+1. **不要连续手动重跑。** 短时间内重复触发可能延长临时封禁。先等待 30–60 分钟，让下一次定时任务尝试。
+2. **配置固定出口代理（推荐）**：在 GitHub 仓库 **Settings → Secrets and variables → Actions** 新建 `SCRAPE_PROXY_URL`，填入一个可访问该站点的 HTTP(S) 代理地址（例如中国境内的稳定出口）。工作流已经把这个 Secret 传入脚本，`requests` 和 `curl_cffi` 都会走该代理。
+3. **换到非 GitHub 云出口**：使用家里/办公室的常开设备运行 GitHub Actions self-hosted runner，或在本地定时运行 `python scrape.py` 后提交 `data.json`。这是最稳定的长期方案。
+4. 如果服务商提供正式 API，优先使用正式 API，而不是抓取 HTML 页面。
+
+脚本现在在 GitHub Actions 环境中使用 `curl_cffi` 的浏览器 TLS 指纹发起**一次**请求；如果 `curl_cffi` 安装失败则退回 `requests`。不会再降级到 HTTP，也不会从同一 runner IP 连续打两次，避免延长 WAF 限流。请求失败时只退出、不写 `data.json`，日志会打印上游响应片段，便于确认是不是 WAF 页面。本地运行仍保持 `requests` 优先、`curl_cffi` 备用。
 
 ### 性能与容错
 
