@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+  <!-- 深色背景 -->
+  <rect width="800" height="400" fill="#0d1118" />
+  
+  <!-- 科技感网格背景 -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <path d="M0 100 H800 M0 200 H800 M0 300 H800" />
+    <path d="M100 0 V400 M200 0 V400 M300 0 V400 M400 0 V400 M500 0 V400 M600 0 V400 M700 0 V400" />
+  </g>
+
+  <!-- 左侧大闪电图标 (低透明度背景) -->
+  <path d="M150 60 L70 230 H145 L120 340 L220 180 H150 L180 60 Z" fill="rgba(255,209,102,0.03)" />
+
+  <!-- 中心发光闪电 (琥珀色) -->
+  <g transform="translate(340, 120) scale(2.5)">
+    <path d="M24 2L12 22H22L18 38L30 18H20L24 2Z" fill="none" stroke="#ffd166" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M24 2L12 22H22L18 38L30 18H20L24 2Z" fill="url(#glow)" opacity="0.6"/>
+  </g>
+
+  <!-- 发光渐变定义 -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,209,102,0)" />
+      <stop offset="50%" stop-color="#ffd166" />
+      <stop offset="100%" stop-color="rgba(255,209,102,0)" />
+    </linearGradient>
+  </defs>
+
+  <!-- 底部科技感心电图/波形线 -->
+  <path d="M 0 320 L 300 320 L 330 280 L 370 360 L 400 300 L 420 320 L 800 320" 
+        fill="none" stroke="url(#lineGrad)" stroke-width="2" />
+
+  <!-- 右侧一些数据点修饰 -->
+  <circle cx="650" cy="150" r="3" fill="#ffd166" opacity="0.8"/>
+  <circle cx="680" cy="160" r="2" fill="#ffd166" opacity="0.5"/>
+  <circle cx="620" cy="140" r="1.5" fill="#ffd166" opacity="0.3"/>
+</svg>
