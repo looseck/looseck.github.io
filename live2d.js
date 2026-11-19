@@ -94,7 +94,7 @@
   let failed = false;
   let initialised = false;
   let initScheduled = false;
-  let manualHidden = false;
+  let manualHidden = compact;
   let statusTimer = 0;
   let lastAction = '';
   let renderFrame = 0;
@@ -173,7 +173,8 @@
     restore.type = 'button';
     restore.hidden = true;
     restore.setAttribute('aria-label', '显示 Live2D 看板娘');
-    restore.textContent = 'L2D';
+    restore.title = '显示 Live2D 看板娘';
+    restore.textContent = '看板娘';
 
     document.body.append(widget, restore, bubble);
     widget.classList.add('is-mounted');
@@ -631,6 +632,9 @@
     widget.classList.remove('is-hidden');
     layoutWidget(false);
     resume();
+    if (!initialised && !initScheduled && document.readyState === 'complete') {
+      scheduleInit();
+    }
     stage.focus({ preventScroll: true });
   }
 
@@ -1024,7 +1028,7 @@
   }
 
   function scheduleInit() {
-    if (initialised || initScheduled || routeShouldHide()) return;
+    if (initialised || initScheduled || routeShouldHide() || manualHidden) return;
     initScheduled = true;
 
     const start = () => {
@@ -1048,15 +1052,19 @@
   function init() {
     if (!document.body) return;
     makeWidget();
+    if (compact) {
+      widget.classList.add('is-hidden');
+      restore.hidden = false;
+    }
     makeMenu();
     bindInteractions();
     syncRoute();
 
     if (document.readyState === 'complete') {
-      if (!routeShouldHide()) scheduleInit();
+      if (!routeShouldHide() && !manualHidden) scheduleInit();
     } else {
       window.addEventListener('load', () => {
-        if (!routeShouldHide()) scheduleInit();
+        if (!routeShouldHide() && !manualHidden) scheduleInit();
       }, { once: true });
     }
   }
