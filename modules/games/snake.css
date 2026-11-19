@@ -31,14 +31,12 @@
   padding: 18px;
   background:
     linear-gradient(155deg, rgba(255, 255, 255, 0.035), transparent 38%),
-    linear-gradient(180deg, rgba(14, 21, 36, 0.76), rgba(7, 11, 20, 0.82));
+    linear-gradient(180deg, rgba(14, 21, 36, 0.88), rgba(7, 11, 20, 0.92));
   border: 1px solid var(--mod-snake-line);
   border-radius: 24px;
   box-shadow:
     0 26px 68px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.035);
-  -webkit-backdrop-filter: blur(20px) saturate(135%);
-  backdrop-filter: blur(20px) saturate(135%);
 }
 
 .mod-snake-board-head {
@@ -310,8 +308,6 @@
       rgba(3, 6, 12, 0.24) 100%
     ),
     linear-gradient(180deg, rgba(3, 6, 12, 0.32), transparent 25%, transparent 72%, rgba(3, 6, 12, 0.42));
-  -webkit-backdrop-filter: blur(1px);
-  backdrop-filter: blur(1px);
   animation: mod-snake-overlay-in 260ms ease both;
 }
 
@@ -487,14 +483,12 @@
   padding: 18px;
   background:
     linear-gradient(155deg, rgba(255, 255, 255, 0.035), transparent 38%),
-    linear-gradient(180deg, rgba(14, 21, 36, 0.7), rgba(7, 11, 20, 0.76));
+    linear-gradient(180deg, rgba(14, 21, 36, 0.86), rgba(7, 11, 20, 0.9));
   border: 1px solid var(--mod-snake-line);
   border-radius: 20px;
   box-shadow:
     0 22px 55px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
 }
 
 .mod-snake-panel-head {
@@ -706,9 +700,7 @@
 }
 
 .mod-snake-dialog::backdrop {
-  background: rgba(1, 3, 8, 0.76);
-  -webkit-backdrop-filter: blur(9px) saturate(120%);
-  backdrop-filter: blur(9px) saturate(120%);
+  background: rgba(1, 3, 8, 0.88);
   animation: mod-snake-backdrop-in 240ms ease both;
 }
 
